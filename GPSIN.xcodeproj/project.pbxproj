@@ -52,7 +52,6 @@
 		F16813EF19A65F6200F21896 /* GPSINTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GPSINTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F16813F419A65F6200F21896 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F16813F519A65F6200F21896 /* GPSINTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GPSINTests.m; sourceTree = "<group>"; };
-		F16DEAD619A6C0EC008BFF4D /* Objective-C Apps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Objective-C Apps"; path = ..; sourceTree = "<group>"; };
 		F16DEAD819A6C10D008BFF4D /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
 		F16DEAD919A6C10D008BFF4D /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		F16DEADA19A6C10D008BFF4D /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
@@ -104,7 +103,6 @@
 		F16813D019A65F6200F21896 = {
 			isa = PBXGroup;
 			children = (
-				F16DEAD619A6C0EC008BFF4D /* Objective-C Apps */,
 				F16813DB19A65F6200F21896 /* GPSIN */,
 				F16813F219A65F6200F21896 /* GPSINTests */,
 				F16813DA19A65F6200F21896 /* Products */,
