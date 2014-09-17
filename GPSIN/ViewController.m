@@ -21,7 +21,7 @@
 
 //static NSString * const kClientId = @"755255343089-oah0n3irag6sbho9hsu0g7t33th5vjhf.apps.googleusercontent.com";
 static NSString * const kClientId = @"783241267105-s1si6l0t9h1dat18gih2j5bphg7st307.apps.googleusercontent.com";
-static NSString * const kServerClientId = @"783241267105-s1si6l0t9h1dat18gih2j5bphg7st307.apps.googleusercontent.com";
+static NSString * const kServerClientId = @"783241267105-bc7pq09tr1nnogat72r9tgmaeg2mre28.apps.googleusercontent.com";
 static NSString * const kSecret = @"MbSGiXXwLPaanFbJSVseW9qs";
 
 NSMutableData *responsData;
@@ -52,8 +52,8 @@ NSMutableData *responsData;
     [responsData appendData:data];
 }
 
-- (void)doRequestCallback: (NSString *)code {
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://dry-atoll-6423.herokuapp.com/oauth2callback?code=%@", code]];
+- (void)doRequestCallback: (NSString *)serverCode {
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"http://dry-atoll-6423.herokuapp.com/oauth2callback?code=%@", serverCode]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:3.0];
     [request setHTTPMethod:@"POST"];
     //NSString *args = [NSString stringWithFormat:@"code=%@", code];
@@ -99,7 +99,8 @@ NSMutableData *responsData;
 
         //request
         NSString  *code = [auth valueForKey:@"code"]; // access tocken pass in .pch file
-        [self doRequestCallback: code];
+        NSLog(@"code: %@",code);
+        [self doRequestCallback: serverCode];
         
     }
 }
