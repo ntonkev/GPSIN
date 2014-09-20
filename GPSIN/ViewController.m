@@ -55,7 +55,7 @@ NSMutableData *responsData;
 - (void)doRequestCallback: (NSString *)serverCode {
     NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"http://dry-atoll-6423.herokuapp.com/oauth2callback?code=%@", serverCode]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:3.0];
-    [request setHTTPMethod:@"POST"];
+    [request setHTTPMethod:@"GET"];
     //NSString *args = [NSString stringWithFormat:@"code=%@", code];
     
     //NSData *requestBody = [args dataUsingEncoding:NSUTF8StringEncoding];
