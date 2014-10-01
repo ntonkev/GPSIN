@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <GooglePlus/GooglePlus.h>
+#include "GoogleToken.h"
+#include "GoogleUserInfo.h"
+#import "KeychainItemWrapper.h"
 
 @class GPPSignInButton;
 
@@ -16,6 +19,7 @@
 
 @property (retain, nonatomic) IBOutlet GPPSignInButton *signInButton;
 @property (strong, nonatomic) IBOutlet UIButton *signOutButton;
+@property (strong, nonatomic) KeychainItemWrapper *keychainWrapper;
 
 
 - (IBAction)signOutButton_TouchUpInside:(id)sender;

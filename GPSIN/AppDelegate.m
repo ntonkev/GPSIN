@@ -13,11 +13,18 @@
 
 @end
 
+
 @implementation AppDelegate
             
+@synthesize keychain;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"com.herokuapp.dry-atoll-6423" accessGroup:nil];
+    ViewController *viewController = [self.window rootViewController];
+    viewController.keychainWrapper = self.keychain;
+
     return YES;
 }
 

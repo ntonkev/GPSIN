@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KeychainItemWrapper.h"
+#import "ViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) KeychainItemWrapper *keychain;
 
 
 @end

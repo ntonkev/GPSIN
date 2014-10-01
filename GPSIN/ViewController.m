@@ -18,6 +18,7 @@
 
 @synthesize signInButton;
 @synthesize signOutButton;
+@synthesize keychainWrapper;
 
 //static NSString * const kClientId = @"755255343089-oah0n3irag6sbho9hsu0g7t33th5vjhf.apps.googleusercontent.com";
 static NSString * const kClientId = @"783241267105-s1si6l0t9h1dat18gih2j5bphg7st307.apps.googleusercontent.com";
@@ -27,51 +28,48 @@ static NSString * const kSecret = @"MbSGiXXwLPaanFbJSVseW9qs";
 NSMutableData *responsData;
 
 
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSLog(@"Succeeded! Received %d bytes of data",[responsData length]);
-    NSString *str = [[NSString alloc] initWithData:responsData encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", str);
-}
-
--(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    NSLog(@"%@\n", error.description);
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [responsData setLength:0];
-    NSLog(@"%@\n", response.description);
+-(void)doRegisterUser: (NSString *)access_token {
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://dry-atoll-6423.herokuapp.com/registeruser?access_token=%@", access_token]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
     
+    [NSURLConnection sendAsynchronousRequest:request queue: [NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSMutableDictionary * jsonResult = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableLeaves error:nil];
+        
+        GoogleUserInfo *googleUserInfo = [[GoogleUserInfo alloc] initWithNSDictionary:jsonResult];
+        NSLog([googleUserInfo description]);
+        //[self doRegisterUser: googleToken.access_token];
+    }];
 }
 
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [responsData appendData:data];
-}
-
-- (void)doRequestCallback: (NSString *)serverCode {
+-(void)doRequestCallback: (NSString *)serverCode {
     NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"http://dry-atoll-6423.herokuapp.com/oauth2callback?code=%@", serverCode]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:3.0];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"GET"];
-    //NSString *args = [NSString stringWithFormat:@"code=%@", code];
-    
-    //NSData *requestBody = [args dataUsingEncoding:NSUTF8StringEncoding];
-    [request setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
-    //[request setHTTPBody:requestBody];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
-    if (connection) {
-        responsData = [NSMutableData data];
-    }
+
+    [NSURLConnection sendAsynchronousRequest:request queue: [NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSMutableDictionary * jsonResult = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableLeaves error:nil];
+        
+        GoogleToken *googleToken = [[GoogleToken alloc] initWithAccessToken:[jsonResult valueForKey:@"access_token"] withExpiredIn:[jsonResult valueForKey:@"expires_in"] withIdTkn:[jsonResult valueForKey:@"id_token"] withRefTkn:[jsonResult valueForKey:@"refresh_token"] withTknType:[jsonResult valueForKey:@"token_type"]];
+        NSLog([googleToken description]);
+        [keychainWrapper  setObject:googleToken.access_token forKey:(__bridge id)kSecValueData];
+        [self doRegisterUser: googleToken.access_token];
+    }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //[self disconnect];
-
+    
+//    id token = [keychainWrapper objectForKey:(__bridge id)kSecValueData];
+    if([keychainWrapper objectForKey:(__bridge id)(kSecValueData)]){
+        //NSLog([token  getValue]);
+        NSLog(@"It's there: %@", [keychainWrapper objectForKey:(__bridge id)(kSecValueData)]);
+    }
+//    else{
+//        [keychainWrapper  setObject:@"token" forKey:(__bridge id)kSecValueData];
+//    }
+    
+    
     GPPSignIn *signIn = [GPPSignIn sharedInstance];
     signIn.shouldFetchGooglePlusUser = YES;
    
@@ -91,15 +89,6 @@ NSMutableData *responsData;
         // Do some error handling here.
     } else {
         NSString *serverCode = [GPPSignIn sharedInstance].homeServerAuthorizationCode;
-        NSLog(@"server_code: %@",serverCode);
-        
-        
-        NSString  *accessTocken = [auth valueForKey:@"accessToken"]; // access tocken pass in .pch file
-        NSLog(@"accessTocken: %@",accessTocken);
-
-        //request
-        NSString  *code = [auth valueForKey:@"code"]; // access tocken pass in .pch file
-        NSLog(@"code: %@",code);
         [self doRequestCallback: serverCode];
         
     }

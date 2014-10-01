@@ -27,6 +27,9 @@
 		F16DEAF119A6C604008BFF4D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16DEAE619A6C604008BFF4D /* Security.framework */; };
 		F16DEAF219A6C604008BFF4D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16DEAE719A6C604008BFF4D /* SystemConfiguration.framework */; };
 		F16DEAF319A6C604008BFF4D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16DEAE819A6C604008BFF4D /* UIKit.framework */; };
+		F1DD755819DB64AE005EA529 /* GoogleToken.m in Sources */ = {isa = PBXBuildFile; fileRef = F1DD755719DB64AE005EA529 /* GoogleToken.m */; };
+		F1DD755C19DB7B0C005EA529 /* GoogleUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F1DD755B19DB7B0C005EA529 /* GoogleUserInfo.m */; };
+		F1DD755F19DB8685005EA529 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = F1DD755D19DB8685005EA529 /* KeychainItemWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,12 @@
 		F16DEAE619A6C604008BFF4D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F16DEAE719A6C604008BFF4D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F16DEAE819A6C604008BFF4D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F1DD755719DB64AE005EA529 /* GoogleToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleToken.m; sourceTree = "<group>"; };
+		F1DD755919DB64E8005EA529 /* GoogleToken.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleToken.h; sourceTree = "<group>"; };
+		F1DD755A19DB7A33005EA529 /* GoogleUserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleUserInfo.h; sourceTree = "<group>"; };
+		F1DD755B19DB7B0C005EA529 /* GoogleUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleUserInfo.m; sourceTree = "<group>"; };
+		F1DD755D19DB8685005EA529 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		F1DD755E19DB8685005EA529 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +130,7 @@
 		F16813DB19A65F6200F21896 /* GPSIN */ = {
 			isa = PBXGroup;
 			children = (
+				F1DD755219DB6393005EA529 /* Models */,
 				F1FF47FC19A6B5E300D695B6 /* Frameworks */,
 				F1FF47FB19A6B5D400D695B6 /* Views */,
 				F1FF47FA19A6B5CB00D695B6 /* Delegates */,
@@ -154,6 +164,19 @@
 				F16813F419A65F6200F21896 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1DD755219DB6393005EA529 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F1DD755D19DB8685005EA529 /* KeychainItemWrapper.m */,
+				F1DD755E19DB8685005EA529 /* KeychainItemWrapper.h */,
+				F1DD755719DB64AE005EA529 /* GoogleToken.m */,
+				F1DD755919DB64E8005EA529 /* GoogleToken.h */,
+				F1DD755A19DB7A33005EA529 /* GoogleUserInfo.h */,
+				F1DD755B19DB7B0C005EA529 /* GoogleUserInfo.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		F1FF47F919A6B5BD00D695B6 /* Controllers */ = {
@@ -304,7 +327,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F16813E519A65F6200F21896 /* ViewController.m in Sources */,
+				F1DD755C19DB7B0C005EA529 /* GoogleUserInfo.m in Sources */,
+				F1DD755F19DB8685005EA529 /* KeychainItemWrapper.m in Sources */,
 				F16813E219A65F6200F21896 /* AppDelegate.m in Sources */,
+				F1DD755819DB64AE005EA529 /* GoogleToken.m in Sources */,
 				F16813DF19A65F6200F21896 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
